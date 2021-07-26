@@ -1,0 +1,24 @@
+{
+	"name": "ToDoList Spring Boot App",
+
+	"dockerComposeFile": [
+		"../docker-compose.yaml",
+		"docker-compose.yaml"
+	],
+
+	"service": "app",
+
+	"workspaceFolder": "/todolist",
+
+	"settings": {
+		"java.home": "/docker-java-home",
+		"terminal.integrated.defaultProfile": "linux"
+	},
+
+	"extensions": [
+		"vscjava.vscode-java-pack",
+		"redhat.vscode-xml",
+		"vivaxy.vscode-conventional-commits",
+		"gabrielbb.vscode-lombok"
+	]
+}

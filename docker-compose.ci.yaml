@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ci
+    container_name: todolist_app
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    build: .docker/mongo
+    networks:
+      - app-network
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+      - MONGO_INITDB_DATABASE=todolist
+
+networks:
+  app-network:
+    driver: bridge
