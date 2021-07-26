@@ -1,11 +1,10 @@
 package br.com.leandro.todolist.adapters.persistance.repositories.mongodb;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import br.com.leandro.todolist.domain.entities.Todo;
@@ -42,10 +41,9 @@ public class MongoDBTodoRepository implements ITodoRepository {
 	}
 
 	@Override
-	public List<Todo> findAll(int page, int size) {
-		PageRequest paging = PageRequest.of(page, size);
-		Page<Todo> pageTodos = todoRepository.findAll(paging);
-		return pageTodos.getContent();
+	public Page<Todo> findAll(Pageable pagination) {
+		Page<Todo> pageTodos = todoRepository.findAll(pagination);
+		return pageTodos;
 	}
 
 	@Override

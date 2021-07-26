@@ -1,7 +1,9 @@
 package br.com.leandro.todolist.domain.ports;
 
-import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 
@@ -15,7 +17,7 @@ public interface ITodoRepository {
 
 	public Todo findByDescription(String description);
 
-	public List<Todo> findAll(int page, int size);
+	public Page<Todo> findAll(Pageable pagination);
 
 	public void destroy(Todo todo);
 

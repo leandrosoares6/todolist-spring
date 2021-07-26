@@ -26,8 +26,8 @@ public class ListTodosUnitTest {
 
 	@Test
 	void shouldListAllTodos() {
-		listTodos.execute(Optional.of(1), Optional.of(10));
-		verify(todoRepository).findAll(1, 10);
+		listTodos.execute(Optional.of(1), Optional.of(10), Optional.of("asc"));
+		verify(todoRepository).findAll(1, 10, "asc");
 	}
 
 }

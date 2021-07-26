@@ -1,11 +1,11 @@
 package br.com.leandro.todolist.domain.ports.outputs;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 
 public interface IListTodosOutput {
 
-	List<?> presentTodos(List<Todo> todos);
+	Page<?> presentTodos(Page<Todo> todos);
 
 }

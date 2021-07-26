@@ -1,12 +1,12 @@
 package br.com.leandro.todolist.adapters.api.controllers;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.leandro.todolist.adapters.api.responses.TodoResponse;
@@ -26,10 +26,9 @@ public class ListTodosController {
 
 	@GetMapping
 	@SuppressWarnings("unchecked")
-	public List<TodoResponse> index(@RequestParam(name = "page") Optional<Integer> page,
-			@RequestParam(name = "size") Optional<Integer> size) {
+	public Page<TodoResponse> index(@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination) {
 		ListTodos listTodos = new ListTodos(todoRepository, viewModel);
-		return (List<TodoResponse>) listTodos.execute(page, size);
+		return (Page<TodoResponse>) listTodos.execute(pagination);
 	}
 
 }
