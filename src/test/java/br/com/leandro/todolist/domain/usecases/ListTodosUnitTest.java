@@ -3,10 +3,11 @@ package br.com.leandro.todolist.domain.usecases;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import br.com.leandro.todolist.domain.ports.ITodoRepository;
 import br.com.leandro.todolist.domain.ports.outputs.IListTodosOutput;
@@ -26,8 +27,9 @@ public class ListTodosUnitTest {
 
 	@Test
 	void shouldListAllTodos() {
-		listTodos.execute(Optional.of(1), Optional.of(10), Optional.of("asc"));
-		verify(todoRepository).findAll(1, 10, "asc");
+		Pageable pagination = PageRequest.of(0, 10, Sort.by("title"));
+		listTodos.execute(pagination);
+		verify(todoRepository).findAll(pagination);
 	}
 
 }

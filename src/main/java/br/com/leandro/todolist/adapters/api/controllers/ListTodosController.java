@@ -26,7 +26,8 @@ public class ListTodosController {
 
 	@GetMapping
 	@SuppressWarnings("unchecked")
-	public Page<TodoResponse> index(@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination) {
+	public Page<TodoResponse> index(
+			@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination) {
 		ListTodos listTodos = new ListTodos(todoRepository, viewModel);
 		return (Page<TodoResponse>) listTodos.execute(pagination);
 	}

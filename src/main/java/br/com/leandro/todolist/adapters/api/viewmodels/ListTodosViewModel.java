@@ -17,8 +17,8 @@ public class ListTodosViewModel implements IListTodosOutput {
 	@SuppressWarnings("unchecked")
 	public Page<TodoResponse> presentTodos(Page<Todo> todos) {
 		return new PageImpl<TodoResponse>(
-				(List<TodoResponse>) todos.getContent().stream().map(todo -> new TodoResponse(todo)), todos.getPageable(),
-				todos.getTotalElements());
+				(List<TodoResponse>) todos.getContent().stream().map(todo -> new TodoResponse(todo)),
+				todos.getPageable(), todos.getTotalElements());
 	}
 
 }
