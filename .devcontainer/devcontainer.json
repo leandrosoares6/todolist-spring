@@ -19,6 +19,7 @@
 		"vscjava.vscode-java-pack",
 		"redhat.vscode-xml",
 		"vivaxy.vscode-conventional-commits",
-		"gabrielbb.vscode-lombok"
+		"gabrielbb.vscode-lombok",
+		"pivotal.vscode-spring-boot"
 	]
 }

@@ -1,4 +1,4 @@
-package br.com.leandro.todolist.adapters.persistance.repositories.mongodb;
+package br.com.leandro.todolist.adapters.persistance.repositories.postgres;
 
 import java.util.Optional;
 
@@ -11,12 +11,12 @@ import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.ports.ITodoRepository;
 
 @Component
-public class MongoDBTodoRepository implements ITodoRepository {
+public class PostgreSQLTodoRepository implements ITodoRepository {
 
-	private final ISpringDataMongoTodoRepository todoRepository;
+	private final SpringDataPostgresTodoRepository todoRepository;
 
 	@Autowired
-	public MongoDBTodoRepository(final ISpringDataMongoTodoRepository todoRepository) {
+	public PostgreSQLTodoRepository(final SpringDataPostgresTodoRepository todoRepository) {
 		this.todoRepository = todoRepository;
 	}
 

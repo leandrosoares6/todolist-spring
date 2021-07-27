@@ -3,8 +3,15 @@ package br.com.leandro.todolist.domain.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import br.com.leandro.todolist.domain.enums.Status;
+
+@Entity
 public class Todo {
 
+	@Id
 	private String id;
 
 	private String title;
@@ -13,7 +20,9 @@ public class Todo {
 
 	private LocalDateTime createdAt = LocalDateTime.now();
 
-	private LocalDateTime updatedAt;
+	private LocalDateTime completedAt;
+
+	private Status status = Status.OPEN;
 
 	public Todo(String title, String description) {
 		this.id = UUID.randomUUID().toString();
@@ -49,12 +58,20 @@ public class Todo {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
+	public LocalDateTime getCompletedAt() {
+		return completedAt;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setCompletedAt(LocalDateTime completedAt) {
+		this.completedAt = completedAt;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override

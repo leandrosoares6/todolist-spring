@@ -2,14 +2,17 @@ server:
   port: 8080
 
 spring:
-  autoconfigure:
-    exclude:
-      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-  data:
-    mongodb:
-      host: db
-      port: 27017
-      database: todolist
-      username: root
-      password: root
-      authentication-database: admin
+  datasource:
+    platform: postgres
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+
+    url: jdbc:postgresql://db:5432/todolist
+    username: postgres
+    password: postgres
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
