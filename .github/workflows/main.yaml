@@ -8,8 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: add .env from .env.example
-      - run: cp .env.example .env
       - name: Build the stack
         run: docker-compose -f docker-compose.ci.yaml up -d --build
       - name: Test
