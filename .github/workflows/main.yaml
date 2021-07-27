@@ -9,8 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the stack
-        run: docker-compose -f docker-compose.ci.yaml up -d --build
-      - name: Create .env file from .env.example
-        run: docker-compose exec -T cp .env.example .env
+        run: docker-compose -f docker-compose.ci.yaml --env_file=.env.example up -d --build
       - name: Test
         run: docker-compose exec -T app mvn test
