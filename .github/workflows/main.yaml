@@ -10,5 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the stack
         run: docker-compose -f docker-compose.ci.yaml up -d --build
+      - name: Create .env file from .env.example
+        run: docker-compose exec -T cp .env.example .env
       - name: Test
         run: docker-compose exec -T app mvn test
