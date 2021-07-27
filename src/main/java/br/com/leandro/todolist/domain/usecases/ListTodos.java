@@ -4,17 +4,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import br.com.leandro.todolist.domain.entities.Todo;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
-import br.com.leandro.todolist.domain.ports.inputs.IListTodosInput;
-import br.com.leandro.todolist.domain.ports.outputs.IListTodosOutput;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
+import br.com.leandro.todolist.domain.ports.inputs.ListTodosInput;
+import br.com.leandro.todolist.domain.ports.outputs.ListTodosOutput;
 
-public class ListTodos implements IListTodosInput {
+public class ListTodos implements ListTodosInput {
 
-	private final ITodoRepository todoRepository;
+	private final TodoRepository todoRepository;
 
-	private final IListTodosOutput presenter;
+	private final ListTodosOutput presenter;
 
-	public ListTodos(ITodoRepository todoRepository, IListTodosOutput presenter) {
+	public ListTodos(TodoRepository todoRepository, ListTodosOutput presenter) {
 		this.todoRepository = todoRepository;
 		this.presenter = presenter;
 	}

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
 
 public class FindTodoByIdUnitTest {
 
@@ -20,14 +20,14 @@ public class FindTodoByIdUnitTest {
 
 	private Todo anyTodo;
 
-	private ITodoRepository todoRepository;
+	private TodoRepository todoRepository;
 
 	private FindTodoById findTodoById;
 
 	@BeforeEach
 	void setUp() {
 		anyTodo = new Todo("Do physical activity", "30 minutes on three days a week");
-		todoRepository = mock(ITodoRepository.class);
+		todoRepository = mock(TodoRepository.class);
 		findTodoById = new FindTodoById(todoRepository);
 	}
 

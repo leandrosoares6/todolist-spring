@@ -1,0 +1,14 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "editor.codeActionsOnSave": [
+    "source.organizeImports"
+  ],
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*",
+        "cmd": "mvn spring-javaformat:apply"
+      }
+    ]
+  }
+}

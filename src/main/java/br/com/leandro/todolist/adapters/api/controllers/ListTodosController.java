@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.leandro.todolist.adapters.api.responses.TodoResponse;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
-import br.com.leandro.todolist.domain.ports.outputs.IListTodosOutput;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
+import br.com.leandro.todolist.domain.ports.outputs.ListTodosOutput;
 import br.com.leandro.todolist.domain.usecases.ListTodos;
 
 @RestController
@@ -19,10 +19,10 @@ import br.com.leandro.todolist.domain.usecases.ListTodos;
 public class ListTodosController {
 
 	@Autowired
-	private ITodoRepository todoRepository;
+	private TodoRepository todoRepository;
 
 	@Autowired
-	private IListTodosOutput viewModel;
+	private ListTodosOutput viewModel;
 
 	@GetMapping
 	@SuppressWarnings("unchecked")

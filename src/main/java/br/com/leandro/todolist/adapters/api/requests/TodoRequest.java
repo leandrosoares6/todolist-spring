@@ -2,6 +2,8 @@ package br.com.leandro.todolist.adapters.api.requests;
 
 import javax.validation.constraints.NotBlank;
 
+import br.com.leandro.todolist.domain.dtos.TodoData;
+
 public class TodoRequest {
 
 	@NotBlank
@@ -29,6 +31,10 @@ public class TodoRequest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public static TodoData convertToTodoData(TodoRequest request) {
+		return new TodoData(request.getTitle(), request.getDescription());
 	}
 
 }

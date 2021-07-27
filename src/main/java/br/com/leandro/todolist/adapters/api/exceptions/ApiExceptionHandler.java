@@ -1,4 +1,4 @@
-package br.com.leandro.todolist.adapters.exceptions;
+package br.com.leandro.todolist.adapters.api.exceptions;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

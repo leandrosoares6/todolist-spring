@@ -2,13 +2,13 @@ package br.com.leandro.todolist.domain.usecases;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
 
 public class FindTodoByTitle {
 
-	private ITodoRepository todoRepository;
+	private TodoRepository todoRepository;
 
-	public FindTodoByTitle(ITodoRepository todoRepository) {
+	public FindTodoByTitle(TodoRepository todoRepository) {
 		this.todoRepository = todoRepository;
 	}
 

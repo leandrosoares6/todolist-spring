@@ -8,10 +8,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import br.com.leandro.todolist.domain.entities.Todo;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
 
 @Component
-public class PostgreSQLTodoRepository implements ITodoRepository {
+public class PostgreSQLTodoRepository implements TodoRepository {
 
 	private final SpringDataPostgresTodoRepository todoRepository;
 

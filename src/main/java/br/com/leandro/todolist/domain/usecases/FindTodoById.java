@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
 
 public class FindTodoById {
 
-	private ITodoRepository todoRepository;
+	private TodoRepository todoRepository;
 
-	public FindTodoById(ITodoRepository todoRepository) {
+	public FindTodoById(TodoRepository todoRepository) {
 		this.todoRepository = todoRepository;
 	}
 

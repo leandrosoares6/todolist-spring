@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 
-public interface ITodoRepository {
+public interface TodoRepository {
 
 	public void save(Todo todo);
 

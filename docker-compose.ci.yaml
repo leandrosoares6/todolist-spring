@@ -10,36 +10,31 @@ services:
       - app-network
     depends_on:
       - db
+    env_file: .env
+    environment:
+      - APP_PORT=${APP_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
 
   db:
     image: postgres:12
     networks:
       - app-network
+    env_file: .env
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=${DB_USER-postgres}
+      - POSTGRES_PASSWORD=${DB_USER-postgres}
       - PGDATA=/data/postgres
     volumes:
       - postgres:/data/postgres
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-        
-  pgadmin:
-    container_name: demo_pgadmin
-    image: 'dpage/pgadmin4:4.24'
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin
-      PGADMIN_DEFAULT_PASSWORD: admin
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-      - ./docker_pgadmin_servers.json:/pgadmin4/servers.json
-    ports:
-      - '15433:80'
-    entrypoint:
-      - '/bin/sh'
-      - '-c'
-      - "/bin/echo 'postgres:5432:*:postgres:password' > /tmp/pgpassfile && chmod 600 /tmp/pgpassfile && /entrypoint.sh"
+
+volumes:
+  m2: {}
+  postgres:
 
 networks:
   app-network:

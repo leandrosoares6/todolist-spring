@@ -24,6 +24,9 @@ public class Todo {
 
 	private Status status = Status.OPEN;
 
+	public Todo() {
+	}
+
 	public Todo(String title, String description) {
 		this.id = UUID.randomUUID().toString();
 		this.title = title;

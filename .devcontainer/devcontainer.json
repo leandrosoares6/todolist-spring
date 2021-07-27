@@ -20,6 +20,7 @@
 		"redhat.vscode-xml",
 		"vivaxy.vscode-conventional-commits",
 		"gabrielbb.vscode-lombok",
-		"pivotal.vscode-spring-boot"
+		"pivotal.vscode-spring-boot",
+		"emeraldwalk.runonsave"
 	]
 }

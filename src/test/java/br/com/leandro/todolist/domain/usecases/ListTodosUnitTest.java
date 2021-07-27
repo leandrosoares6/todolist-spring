@@ -9,19 +9,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import br.com.leandro.todolist.domain.ports.ITodoRepository;
-import br.com.leandro.todolist.domain.ports.outputs.IListTodosOutput;
+import br.com.leandro.todolist.domain.ports.TodoRepository;
+import br.com.leandro.todolist.domain.ports.outputs.ListTodosOutput;
 
 public class ListTodosUnitTest {
 
-	private ITodoRepository todoRepository;
+	private TodoRepository todoRepository;
 
 	private ListTodos listTodos;
 
 	@BeforeEach
 	void setUp() {
-		todoRepository = mock(ITodoRepository.class);
-		IListTodosOutput viewModel = mock(IListTodosOutput.class);
+		todoRepository = mock(TodoRepository.class);
+		ListTodosOutput viewModel = mock(ListTodosOutput.class);
 		listTodos = new ListTodos(todoRepository, viewModel);
 	}
 
