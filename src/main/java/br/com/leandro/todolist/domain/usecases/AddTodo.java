@@ -17,10 +17,14 @@ public class AddTodo {
 		Todo todoFromDd = todoRepository.findByTitle(todoData.getTitle());
 
 		if (todoFromDd != null) {
-			throw new EntityAlreadyExistsException("Entity already exists.");
+			throw new EntityAlreadyExistsException("Todo with same title already exists.");
 		}
 
 		Todo todo = new Todo(todoData.getTitle(), todoData.getDescription());
+
+		if (todoData.getStatus() != null) {
+			todo.setStatus(todoData.getStatus());
+		}
 
 		todoRepository.save(todo);
 
