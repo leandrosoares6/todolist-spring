@@ -1,6 +1,7 @@
 package br.com.leandro.todolist.domain.usecases;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
@@ -41,6 +42,21 @@ public class UpdateTodoUnitTest {
 		doReturn(Optional.of(todo)).when(todoRepository).findById(todo.getId().toString());
 
 		updateTodo.execute(todo.getId().toString(), todoRequest.convert());
+
+		verify(todoRepository).save(any(Todo.class));
+
+	}
+
+	@Test
+	void shouldUpdateTodoAndSetCompletedDate_whenPassingValidDataAndStatusCompleted() {
+		TodoRequest todoRequest = new TodoRequest("Learning Full Cycle course", "Study at least 2 hours a day",
+				Status.COMPLETED.toString());
+
+		doReturn(Optional.of(todo)).when(todoRepository).findById(todo.getId().toString());
+
+		updateTodo.execute(todo.getId().toString(), todoRequest.convert());
+
+		assertNotNull(todo.getCompletedAt());
 
 		verify(todoRepository).save(any(Todo.class));
 

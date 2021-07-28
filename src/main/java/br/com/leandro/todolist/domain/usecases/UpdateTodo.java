@@ -1,9 +1,11 @@
 package br.com.leandro.todolist.domain.usecases;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import br.com.leandro.todolist.domain.dtos.TodoData;
 import br.com.leandro.todolist.domain.entities.Todo;
+import br.com.leandro.todolist.domain.enums.Status;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
 import br.com.leandro.todolist.domain.ports.TodoRepository;
 
@@ -26,6 +28,10 @@ public class UpdateTodo {
 		todo.setTitle(todoData.getTitle());
 		todo.setDescription(todoData.getDescription());
 		todo.setStatus(todoData.getStatus());
+
+		if (todo.getStatus() == Status.COMPLETED) {
+			todo.setCompletedAt(LocalDateTime.now());
+		}
 
 		todoRepository.save(todo);
 
