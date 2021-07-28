@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import br.com.leandro.todolist.domain.ports.TodoRepository;
-import br.com.leandro.todolist.domain.ports.outputs.ListTodosOutput;
 
 public class ListTodosUnitTest {
 
@@ -21,8 +20,7 @@ public class ListTodosUnitTest {
 	@BeforeEach
 	void setUp() {
 		todoRepository = mock(TodoRepository.class);
-		ListTodosOutput viewModel = mock(ListTodosOutput.class);
-		listTodos = new ListTodos(todoRepository, viewModel);
+		listTodos = new ListTodos(todoRepository);
 	}
 
 	@Test

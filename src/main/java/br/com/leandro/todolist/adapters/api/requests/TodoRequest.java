@@ -33,8 +33,8 @@ public class TodoRequest {
 		this.description = description;
 	}
 
-	public static TodoData convertToTodoData(TodoRequest request) {
-		return new TodoData(request.getTitle(), request.getDescription());
+	public TodoData convert() {
+		return new TodoData(title, description);
 	}
 
 }

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import br.com.leandro.todolist.adapters.api.requests.TodoRequest;
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.ports.TodoRepository;
-import br.com.leandro.todolist.domain.ports.outputs.AddTodoOutput;
 
 public class AddTodoUnitTest {
 
@@ -21,14 +20,13 @@ public class AddTodoUnitTest {
 	@BeforeEach
 	void setUp() {
 		todoRepository = mock(TodoRepository.class);
-		AddTodoOutput viewModel = mock(AddTodoOutput.class);
-		addTodo = new AddTodo(todoRepository, viewModel);
+		addTodo = new AddTodo(todoRepository);
 	}
 
 	@Test
 	void shouldAddTodo_whenPassingValidData() {
 		TodoRequest todo = new TodoRequest("Learning Full Cycle course", "Study at least 2 hours a day");
-		addTodo.execute(TodoRequest.convertToTodoData(todo));
+		addTodo.execute(todo.convert());
 		verify(todoRepository).save(any(Todo.class));
 	}
 
