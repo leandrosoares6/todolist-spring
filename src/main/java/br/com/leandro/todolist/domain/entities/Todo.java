@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import br.com.leandro.todolist.domain.enums.Status;
@@ -12,7 +14,7 @@ import br.com.leandro.todolist.domain.enums.Status;
 public class Todo {
 
 	@Id
-	private String id;
+	private UUID id = UUID.randomUUID();
 
 	private String title;
 
@@ -22,19 +24,19 @@ public class Todo {
 
 	private LocalDateTime completedAt;
 
-	private Status status = Status.OPEN;
+	@Enumerated(EnumType.STRING)
+	private Status status = Status.OPENED;
 
 	public Todo() {
 	}
 
 	public Todo(String title, String description) {
-		this.id = UUID.randomUUID().toString();
 		this.title = title;
 		this.description = description;
 	}
 
 	public String getId() {
-		return id;
+		return id.toString();
 	}
 
 	public String getTitle() {
