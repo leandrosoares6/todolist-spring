@@ -1,6 +1,7 @@
 package br.com.leandro.todolist.adapters.persistance.repositories.postgres;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,7 +27,7 @@ public class PostgreSQLTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public Optional<Todo> findById(String id) {
+	public Optional<Todo> findById(UUID id) {
 		return todoRepository.findById(id);
 	}
 

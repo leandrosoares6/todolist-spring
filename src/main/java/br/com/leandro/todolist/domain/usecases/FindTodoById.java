@@ -1,6 +1,7 @@
 package br.com.leandro.todolist.domain.usecases;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
@@ -15,7 +16,9 @@ public class FindTodoById {
 	}
 
 	public Todo execute(String id) {
-		Optional<Todo> todoFromDd = todoRepository.findById(id);
+		UUID uuid = UUID.fromString(id);
+
+		Optional<Todo> todoFromDd = todoRepository.findById(uuid);
 
 		if (!todoFromDd.isPresent()) {
 			throw new EntityNotFoundException("Entity not found.");
