@@ -6,7 +6,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,8 +33,7 @@ public class FindTodoByIdUnitTest {
 
 	@Test
 	void shouldGetTodo_whenSearchedTodoExists() {
-		var anyTodoUUID = UUID.fromString(anyTodo.getId());
-		when(todoRepository.findById(anyTodoUUID)).thenReturn(Optional.of(anyTodo));
+		when(todoRepository.findById(anyTodo.getId())).thenReturn(Optional.of(anyTodo));
 		Todo result = findTodoById.execute(anyTodo.getId());
 		assertEquals(result, anyTodo);
 	}

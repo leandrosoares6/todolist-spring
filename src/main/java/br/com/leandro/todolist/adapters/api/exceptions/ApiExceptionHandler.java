@@ -18,6 +18,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.leandro.todolist.domain.exceptions.DomainException;
+import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -26,8 +27,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	private MessageSource messageSource;
 
 	@ExceptionHandler(DomainException.class)
-	public ResponseEntity<Object> HandleDomainException(DomainException error, WebRequest request) {
+	public ResponseEntity<Object> handleDomainException(DomainException error, WebRequest request) {
 		var status = HttpStatus.BAD_REQUEST;
+
+		var appException = new AppException();
+		appException.setStatus(status.value());
+		appException.setTitle(error.getMessage());
+		appException.setDateTime(LocalDateTime.now());
+
+		return handleExceptionInternal(error, appException, new HttpHeaders(), status, request);
+	}
+
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException error, WebRequest request) {
+		var status = HttpStatus.NOT_FOUND;
 
 		var appException = new AppException();
 		appException.setStatus(status.value());

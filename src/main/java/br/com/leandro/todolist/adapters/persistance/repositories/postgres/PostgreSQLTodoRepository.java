@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import br.com.leandro.todolist.domain.entities.Todo;
+import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
 import br.com.leandro.todolist.domain.ports.TodoRepository;
 
 @Component
@@ -27,8 +28,15 @@ public class PostgreSQLTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public Optional<Todo> findById(UUID id) {
-		return todoRepository.findById(id);
+	public Optional<Todo> findById(String id) {
+		try {
+			UUID.fromString(id);
+		}
+		catch (IllegalArgumentException e) {
+			throw new EntityNotFoundException();
+		}
+
+		return todoRepository.findById(UUID.fromString(id));
 	}
 
 	@Override

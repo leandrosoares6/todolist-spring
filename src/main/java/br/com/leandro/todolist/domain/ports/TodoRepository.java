@@ -1,7 +1,6 @@
 package br.com.leandro.todolist.domain.ports;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +11,7 @@ public interface TodoRepository {
 
 	public void save(Todo todo);
 
-	public Optional<Todo> findById(UUID id);
+	public Optional<Todo> findById(String id);
 
 	public Todo findByTitle(String title);
 
