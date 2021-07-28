@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,7 @@ import br.com.leandro.todolist.domain.ports.TodoRepository;
 import br.com.leandro.todolist.domain.usecases.AddTodo;
 import br.com.leandro.todolist.domain.usecases.FindTodoById;
 import br.com.leandro.todolist.domain.usecases.ListTodos;
+import br.com.leandro.todolist.domain.usecases.RemoveTodo;
 import br.com.leandro.todolist.domain.usecases.UpdateTodo;
 
 @RestController
@@ -63,6 +65,13 @@ public class TodoController {
 	public ResponseEntity<TodoResponse> update(@PathVariable String id, @Valid @RequestBody TodoRequest todoRequest) {
 		UpdateTodo updateTodo = new UpdateTodo(todoRepository);
 		return ResponseEntity.ok(new TodoResponse(updateTodo.execute(id, todoRequest.convert())));
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<TodoResponse> destroy(@PathVariable String id) {
+		RemoveTodo deleteTodo = new RemoveTodo(todoRepository);
+		deleteTodo.execute(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
