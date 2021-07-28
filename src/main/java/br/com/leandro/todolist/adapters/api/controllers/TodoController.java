@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ import br.com.leandro.todolist.domain.ports.TodoRepository;
 import br.com.leandro.todolist.domain.usecases.AddTodo;
 import br.com.leandro.todolist.domain.usecases.FindTodoById;
 import br.com.leandro.todolist.domain.usecases.ListTodos;
+import br.com.leandro.todolist.domain.usecases.UpdateTodo;
 
 @RestController
 @RequestMapping("/todos")
@@ -55,6 +57,12 @@ public class TodoController {
 	public ResponseEntity<TodoResponse> show(@PathVariable String id) {
 		FindTodoById findTodo = new FindTodoById(todoRepository);
 		return ResponseEntity.ok(new TodoResponse(findTodo.execute(id)));
+	}
+
+	@PutMapping("/{id}")
+	public ResponseEntity<TodoResponse> update(@PathVariable String id, @Valid @RequestBody TodoRequest todoRequest) {
+		UpdateTodo updateTodo = new UpdateTodo(todoRepository);
+		return ResponseEntity.ok(new TodoResponse(updateTodo.execute(id, todoRequest.convert())));
 	}
 
 }
