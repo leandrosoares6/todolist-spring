@@ -33,8 +33,8 @@ public class FindTodoByIdUnitTest {
 
 	@Test
 	void shouldGetTodo_whenSearchedTodoExists() {
-		when(todoRepository.findById(anyTodo.getId())).thenReturn(Optional.of(anyTodo));
-		Todo result = findTodoById.execute(anyTodo.getId());
+		when(todoRepository.findById(anyTodo.getId().toString())).thenReturn(Optional.of(anyTodo));
+		Todo result = findTodoById.execute(anyTodo.getId().toString());
 		assertEquals(result, anyTodo);
 	}
 

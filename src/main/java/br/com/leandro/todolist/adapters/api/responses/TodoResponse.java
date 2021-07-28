@@ -19,7 +19,7 @@ public class TodoResponse {
 	private final String status;
 
 	public TodoResponse(Todo todo) {
-		this.id = todo.getId();
+		this.id = todo.getId().toString();
 		this.title = todo.getTitle();
 		this.description = todo.getDescription();
 		this.status = todo.getStatus().toString();

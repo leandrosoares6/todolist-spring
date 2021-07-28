@@ -38,9 +38,9 @@ public class UpdateTodoUnitTest {
 		TodoRequest todoRequest = new TodoRequest("Learning Full Cycle course", "Study at least 2 hours a day",
 				Status.OPENED.toString());
 
-		doReturn(Optional.of(todo)).when(todoRepository).findById(todo.getId());
+		doReturn(Optional.of(todo)).when(todoRepository).findById(todo.getId().toString());
 
-		updateTodo.execute(todo.getId(), todoRequest.convert());
+		updateTodo.execute(todo.getId().toString(), todoRequest.convert());
 
 		verify(todoRepository).save(any(Todo.class));
 
