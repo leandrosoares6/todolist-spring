@@ -1,5 +1,6 @@
 package br.com.leandro.todolist.adapters.persistance.repositories.postgres;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import br.com.leandro.todolist.adapters.persistance.repositories.postgres.specifications.TodoSpecifications;
 import br.com.leandro.todolist.domain.entities.Todo;
 import br.com.leandro.todolist.domain.exceptions.EntityNotFoundException;
 import br.com.leandro.todolist.domain.ports.TodoRepository;
@@ -50,9 +52,14 @@ public class PostgreSQLTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public Page<Todo> findAll(Pageable pagination) {
-		Page<Todo> pageTodos = todoRepository.findAll(pagination);
-		return pageTodos;
+	public Page<Todo> findAll(Pageable pagination, Map<String, String> filters) {
+		if (filters.size() == 0) {
+			return todoRepository.findAll(pagination);
+		}
+
+		return todoRepository.findAll(
+				TodoSpecifications.likeTitleOrDescription(filters.get("title"), filters.get("description")),
+				pagination);
 	}
 
 	@Override

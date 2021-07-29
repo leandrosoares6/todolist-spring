@@ -1,5 +1,7 @@
 package br.com.leandro.todolist.domain.usecases;
 
+import java.util.Map;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,8 +16,8 @@ public class ListTodos {
 		this.todoRepository = todoRepository;
 	}
 
-	public Page<Todo> execute(Pageable pagination) {
-		Page<Todo> todos = todoRepository.findAll(pagination);
+	public Page<Todo> execute(Pageable pagination, Map<String, String> filters) {
+		Page<Todo> todos = todoRepository.findAll(pagination, filters);
 		return todos;
 	}
 

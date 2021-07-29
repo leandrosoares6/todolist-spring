@@ -3,6 +3,9 @@ package br.com.leandro.todolist.domain.usecases;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +20,8 @@ public class ListTodosUnitTest {
 
 	private ListTodos listTodos;
 
+	private Map<String, String> filters = new HashMap<>();
+
 	@BeforeEach
 	void setUp() {
 		todoRepository = mock(TodoRepository.class);
@@ -26,8 +31,8 @@ public class ListTodosUnitTest {
 	@Test
 	void shouldListAllTodos() {
 		Pageable pagination = PageRequest.of(0, 10, Sort.by("title"));
-		listTodos.execute(pagination);
-		verify(todoRepository).findAll(pagination);
+		listTodos.execute(pagination, filters);
+		verify(todoRepository).findAll(pagination, filters);
 	}
 
 }

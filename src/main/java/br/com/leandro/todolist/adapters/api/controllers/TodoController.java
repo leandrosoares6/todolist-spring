@@ -1,6 +1,7 @@
 package br.com.leandro.todolist.adapters.api.controllers;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -50,9 +52,10 @@ public class TodoController {
 
 	@GetMapping
 	public Page<TodoResponse> index(
-			@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination) {
+			@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination,
+			@RequestParam Map<String, String> filters) {
 		ListTodos listTodos = new ListTodos(todoRepository);
-		return TodoResponse.fromTodoPage(listTodos.execute(pagination));
+		return TodoResponse.fromTodoPage(listTodos.execute(pagination, filters));
 	}
 
 	@GetMapping("/{id}")
