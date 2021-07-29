@@ -53,7 +53,7 @@ public class TodoController {
 	@GetMapping
 	public Page<TodoResponse> index(
 			@PageableDefault(page = 0, size = 10, sort = "title", direction = Direction.ASC) Pageable pagination,
-			@RequestParam Map<String, String> filters) {
+			@RequestParam(required = false) Map<String, String> filters) {
 		ListTodos listTodos = new ListTodos(todoRepository);
 		return TodoResponse.fromTodoPage(listTodos.execute(pagination, filters));
 	}
