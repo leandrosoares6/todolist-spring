@@ -28,6 +28,7 @@ public class UpdateTodo {
 		todo.setTitle(todoData.getTitle());
 		todo.setDescription(todoData.getDescription());
 		todo.setStatus(todoData.getStatus());
+		todo.setUpdatedAt(LocalDateTime.now());
 
 		if (todo.getStatus() == Status.COMPLETED) {
 			todo.setCompletedAt(LocalDateTime.now());
