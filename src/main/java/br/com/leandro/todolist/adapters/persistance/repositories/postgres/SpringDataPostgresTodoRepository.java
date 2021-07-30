@@ -11,8 +11,4 @@ import br.com.leandro.todolist.domain.entities.Todo;
 @Repository
 public interface SpringDataPostgresTodoRepository extends JpaRepository<Todo, UUID>, JpaSpecificationExecutor<Todo> {
 
-	public Todo findByTitle(String title);
-
-	public Todo findByDescription(String description);
-
 }

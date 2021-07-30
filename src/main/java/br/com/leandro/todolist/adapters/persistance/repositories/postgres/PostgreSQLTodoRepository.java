@@ -42,16 +42,6 @@ public class PostgreSQLTodoRepository implements TodoRepository {
 	}
 
 	@Override
-	public Todo findByTitle(String title) {
-		return todoRepository.findByTitle(title);
-	}
-
-	@Override
-	public Todo findByDescription(String description) {
-		return todoRepository.findByDescription(description);
-	}
-
-	@Override
 	public Page<Todo> findAll(Pageable pagination, Map<String, String> filters) {
 		if (filters.size() == 0) {
 			return todoRepository.findAll(pagination);

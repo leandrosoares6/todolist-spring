@@ -14,10 +14,6 @@ public interface TodoRepository {
 
 	public Optional<Todo> findById(String id);
 
-	public Todo findByTitle(String title);
-
-	public Todo findByDescription(String description);
-
 	public Page<Todo> findAll(Pageable pagination, Map<String, String> filters);
 
 	public void destroy(Todo todo);
