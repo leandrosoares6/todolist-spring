@@ -42,12 +42,11 @@ public class TodoController {
 	@PostMapping
 	public ResponseEntity<TodoResponse> create(@Valid @RequestBody TodoRequest todoRequest) {
 		AddTodo addTodo = new AddTodo(todoRepository);
-		Todo response = addTodo.execute(todoRequest.convert());
+		Todo todo = addTodo.execute(todoRequest.convert());
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.getId())
-				.toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todo.getId()).toUri();
 
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(new TodoResponse(todo));
 	}
 
 	@GetMapping
