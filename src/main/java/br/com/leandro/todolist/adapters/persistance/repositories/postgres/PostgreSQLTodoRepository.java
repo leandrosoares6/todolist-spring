@@ -43,7 +43,7 @@ public class PostgreSQLTodoRepository implements TodoRepository {
 
 	@Override
 	public Page<Todo> findAll(Pageable pagination, Map<String, String> filters) {
-		if (filters.size() == 0) {
+		if (filters.get("title") == null && filters.get("description") == null) {
 			return todoRepository.findAll(pagination);
 		}
 

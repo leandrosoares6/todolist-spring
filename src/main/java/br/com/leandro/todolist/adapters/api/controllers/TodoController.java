@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ import br.com.leandro.todolist.domain.usecases.ListTodos;
 import br.com.leandro.todolist.domain.usecases.RemoveTodo;
 import br.com.leandro.todolist.domain.usecases.UpdateTodo;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/todos")
 public class TodoController {
@@ -70,7 +72,7 @@ public class TodoController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<TodoResponse> destroy(@PathVariable String id) {
+	public ResponseEntity<?> destroy(@PathVariable String id) {
 		RemoveTodo deleteTodo = new RemoveTodo(todoRepository);
 		deleteTodo.execute(id);
 		return ResponseEntity.noContent().build();

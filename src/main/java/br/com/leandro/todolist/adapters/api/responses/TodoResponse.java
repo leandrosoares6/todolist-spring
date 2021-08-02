@@ -30,8 +30,8 @@ public class TodoResponse {
 		this.title = todo.getTitle();
 		this.description = todo.getDescription();
 		this.status = todo.getStatus().toString();
-		this.createdAt = todo.getCreatedAt().format(df).toString();
-		this.updatedAt = todo.getUpdatedAt().format(df).toString();
+		this.createdAt = todo.getCreatedAt().minusHours(3).format(df).toString();
+		this.updatedAt = todo.getUpdatedAt().minusHours(3).format(df).toString();
 	}
 
 	public String getId() {
