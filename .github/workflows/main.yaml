@@ -11,4 +11,4 @@ jobs:
       - name: Build the stack
         run: docker-compose -f docker-compose.ci.yaml up -d --build
       - name: Test
-        run: docker-compose exec -T app mvn test
+        run: docker-compose exec -T app mvn test -Djacoco.skip=true
