@@ -2,7 +2,9 @@ package br.com.leandro.todolist.domain;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -15,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEnti
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -51,7 +54,7 @@ public class TodoControllerTest {
 	}
 
 	@Test
-	void shouldReturnAnAircraftByCode() throws Exception {
+	void shouldReturnAnTodoById() throws Exception {
 		mockMvc.perform(get("/todos/" + todo.getId().toString())).andExpect(status().isOk()).andDo(log())
 				.andExpect(jsonPath("$.id", equalTo(todo.getId().toString())))
 				.andExpect(jsonPath("$.title", equalTo(todo.getTitle())))
@@ -60,6 +63,16 @@ public class TodoControllerTest {
 				.andExpect(jsonPath("$.description", equalTo(todo.getDescription())))
 				.andExpect(jsonPath("$.createdAt", equalTo(todoResponse.getCreatedAt())))
 				.andExpect(jsonPath("$.updatedAt", equalTo(todoResponse.getUpdatedAt())));
+	}
+
+	@Test
+	void shouldReturnHttpStatus201WithHeaderAttributeLocationAndTodoResourceInBodyWhenValidRequestIsFormed()
+			throws Exception {
+		String todoJson = "{ \"title\": \"To do test\", \"description\": \"My todo test\" }";
+		mockMvc.perform(post("/todos/").contentType(MediaType.APPLICATION_JSON).content(todoJson))
+				.andExpect(status().isCreated()).andExpect(header().exists("location"))
+				.andExpect(jsonPath("$.title", equalTo("To do test")))
+				.andExpect(jsonPath("$.description", equalTo("My todo test")));
 	}
 
 }
