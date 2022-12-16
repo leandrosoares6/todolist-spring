@@ -24,7 +24,7 @@ services:
       - app-network
     environment:
       - POSTGRES_USER=${DB_USER-postgres}
-      - POSTGRES_PASSWORD=${DB_USER-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD-postgres}
       - PGDATA=/data/postgres
     volumes:
       - postgres:/data/postgres
